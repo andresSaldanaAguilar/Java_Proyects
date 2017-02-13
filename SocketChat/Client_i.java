@@ -3,14 +3,16 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class Interfaz extends JFrame implements ActionListener{
+public class Client_i extends JFrame implements ActionListener{
 
   JButton jb;
   JTextField jt;
   JTextArea jl;
+  Client c;
 
-  public Interfaz(){
-      jb=new JButton("Enter");
+  public Client_i(){
+      c=new Client();
+      jb=new JButton("Send");
       jt=new JTextField (40);
       jl=new JTextArea("");
 
@@ -18,7 +20,7 @@ public class Interfaz extends JFrame implements ActionListener{
       jp.add(jb);jp.add(jt);jp.add(jl);
 
       getContentPane().add("Center", jp);
-      setSize(350, 350);
+      setSize(300, 150);
       setVisible(true);
 
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,12 +28,10 @@ public class Interfaz extends JFrame implements ActionListener{
   }
 
   public void actionPerformed(ActionEvent e){
-      Ticker t=new Ticker(jt.getText());
-      jl.setText(""+t.Tick());
+      c.sendMessage(jt.getText());
   }
 
   public static void main(String args[]){
-    Interfaz i=new Interfaz();
-    Interfaz i1=new Interfaz();
+    Client_i i=new Client_i();
   }
 }

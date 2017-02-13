@@ -1,23 +1,28 @@
+import java.util.*;
+
 public class Ticker implements Runnable{
 
   String cadena;
   Thread t;
   int limite,n;
-
+  ArrayList <Character> al;
+  //Interfaz
 
 
   public Ticker(String cadena){
 
     //logica
+    al=new ArrayList <Character> ();
     this.cadena=cadena;
     t=new Thread(this);
     limite=cadena.length();
     n=0;
   }
 
-  public void Tick(){
+  public ArrayList Tick(){
       System.out.println("Original: "+cadena);
       t.start();
+      return al;
   }
 
   public void run(){
@@ -28,6 +33,7 @@ public class Ticker implements Runnable{
 
      while(n != limite){
       for(int i=0;i<cadena.length();i++){
+          al.add(aCaracteres [j-i]);
           System.out.print(aCaracteres [j-i]);
           try {
               Thread.sleep(200);
@@ -35,7 +41,6 @@ public class Ticker implements Runnable{
               return;
           }n++;
       }
-
     }
   }
 }
