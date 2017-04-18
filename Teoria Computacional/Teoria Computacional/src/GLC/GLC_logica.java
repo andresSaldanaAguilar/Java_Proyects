@@ -96,8 +96,7 @@ public class GLC_logica {
             }
         } catch (IndexOutOfBoundsException ie) {
             System.out.println(al.get(indice)); //igual ño se que hace XD pero sirve
-            System.out.println("No valido (1).");
-            
+            System.out.println("No valido (1).");          
         }
     }
 
@@ -116,12 +115,13 @@ public class GLC_logica {
                 LLC_3();
             }
         } catch (IndexOutOfBoundsException ie) {
-            System.out.println("No valido(2). ");
+            System.out.println("No valido(2). ");           
         }
     }
 
     void LLC_3() {
-
+        //checamos por parentesis perdidos
+        if(pBalance() == true){
         //checamos que el caracter sea un digito
         if (esNumero(al.get(indice)) == true) {
             //el try es para que, si ya no hay mas despues del numero, no nos
@@ -137,18 +137,18 @@ public class GLC_logica {
                     LLC_4();
                 }
             } catch (IndexOutOfBoundsException ie) {
-                System.out.println(al.get(indice));
+                //System.out.println(al.get(indice)); don't know wtf
                 System.out.println("Cadena valida (3).");
             }
         } //o no hay digito o no es un digito.
         else {
             LLC_4();
-            //System.out.println("Cadena invalida, hay caracteres que no son numeros o no hay numeros.");
         }
+        }else System.out.println("Cadena invalida, parentesis sin balance (3 ini).");
+        
     }
 
     void LLC_4() {
-
         //checamos si hay un operando
         if (al.get(indice) == '*' || al.get(indice) == '-' || al.get(indice) == '+') {
             try{
@@ -166,7 +166,9 @@ public class GLC_logica {
     }
 
     void LLC_5() {
+        //checamos por parentesis perdidos
         try {
+            if(pBalance() == true){
             //caso cuando hay parentesis que contienen el numero
             if (al.get(indice) == '(') {
                 if (pBalance() == true) {
@@ -179,6 +181,8 @@ public class GLC_logica {
             else {
                 LLC_6();
             }
+        }
+            else System.out.println("Cadena invalida, parentesis sin balance (5 ini).");
         } catch (IndexOutOfBoundsException ie) {
             System.out.println("Cadena valida (5).");
         }
@@ -204,7 +208,7 @@ public class GLC_logica {
                                 LLC_1();
                             } catch (IndexOutOfBoundsException ie) {
                                 System.out.println(al.get(indice));
-                                System.out.println("Cadena valida (6).");
+                                System.out.println("Cadena valida (6.1).");
                             }
                         }
                         //si no hay y no nos mando error, se repite todo
@@ -213,7 +217,7 @@ public class GLC_logica {
                         }
                     } catch (IndexOutOfBoundsException ie) {
                         System.out.println(al.get(indice));
-                        System.out.println("Cadena valida (6).");
+                        System.out.println("Cadena valida (6.2).");
                     }
                 }
                 //si no hay parentesis ni error, repetimos todo tambien
@@ -223,7 +227,7 @@ public class GLC_logica {
             }
             //si ya no hay nada termino el programa
             catch (IndexOutOfBoundsException ie){
-                System.out.println("Cadena valida (6).");
+                System.out.println("Cadena valida (6.3).");
             }
         } //o no hay digito o no es un digito.
         
