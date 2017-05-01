@@ -85,11 +85,15 @@ public class GLC_logica {
             if (al.get(indice) == '(') {
                 if (pBalance() == true) {
                     indice++;
-                    LLC_2();
+                    if(al.get(indice) == '('){
+                        LLC_1();
+                    }
+                    else LLC_2();
                 } else {
                     System.out.println("Cadena invalida, parentesis sin balance (1).");
                 }
-            } //demas casos, pasamos al siguiente edo, no aumentamos indice por ser
+            } 
+            //demas casos, pasamos al siguiente edo, no aumentamos indice por ser
             //opcional
             else {
                 LLC_2();
@@ -133,7 +137,11 @@ public class GLC_logica {
                 if (al.get(indice) == ')') {
                     indice++;
                     LLC_4();
-                } else {
+                }
+                else if(esNumero(al.get(indice)) == true){
+                    System.out.println("Solo se admiten digitos.");
+                }
+                else {
                     LLC_4();
                 }
             } catch (IndexOutOfBoundsException ie) {
@@ -160,7 +168,17 @@ public class GLC_logica {
         }
             
         }
+        else if(al.get(indice) == ')') {
+            if (pBalance() == true) {
+                    indice++;
+                    if(al.get(indice) == ')'){
+                        LLC_4();
+                    }
+                    else LLC_5();
+            }
+                }
         else {
+            System.out.println(indice);
             System.out.println("Cadena invalida, no hay operando (4).");
         }
     }
@@ -220,6 +238,9 @@ public class GLC_logica {
                         System.out.println("Cadena valida (6.2).");
                     }
                 }
+                else if(esNumero(al.get(indice)) == true){
+                    System.out.println("Solo se admiten digitos.");
+                }
                 //si no hay parentesis ni error, repetimos todo tambien
                 else {
                     LLC_1();
@@ -232,7 +253,9 @@ public class GLC_logica {
         } //o no hay digito o no es un digito.
         
         else {
-            System.out.println("Cadena invalida, hay caracteres que no son numeros o no hay numeros (6).");
+            //System.out.println(al.get(indice));
+            //System.out.println("Cadena invalida, hay caracteres que no son numeros o no hay numeros (6).");
+            LLC_1();
         }
     }
 
