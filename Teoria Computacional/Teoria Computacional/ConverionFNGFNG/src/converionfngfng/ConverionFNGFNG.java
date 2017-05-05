@@ -167,14 +167,18 @@ public class ConverionFNGFNG {
      }*/
     void coincidencia() {
 
-        indice = 0;
+        
         //guarda temporalmente el simbolo
         char simbolo;
         //guarda temporalmente la regla de produccion
         char rp;
         //contador principal
         int indiceProduccion = 0;
-
+        int aux=0;
+        
+        try{
+        do{
+        indice=indiceProduccion;
         
             //encuentra simbolos terminales
             do {
@@ -198,8 +202,12 @@ public class ConverionFNGFNG {
                     indice++;
                 }
             } while (indice < al.size());
-           
-        System.out.println(al.toString());
+            aux++;
+        }while(aux<al.size());
+        }catch(IndexOutOfBoundsException e){
+            System.out.println(al.toString());
+        }
+        
     }
 
     void reeemplazo() {
