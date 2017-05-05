@@ -123,7 +123,7 @@ public class ConverionFNGFNG {
                 try {
                     //aqui validamos de que realmente despues d eun no terminal no
                     //haya otro simbolo              
-                    System.out.println(al.get(indice)+" minuscula encontrada."); //nose que pets
+                    System.out.println(al.get(indice) + " minuscula encontrada."); //nose que pets
                     indice++;
 
                     try {
@@ -156,37 +156,59 @@ public class ConverionFNGFNG {
             }
         }
     }
-    
-    /*void FNG(){
-        indice=reglasProduccion();
-        do{
-            if(esLetraNumero(al.get(indice))==true){
-                al.
-            }      
-        }while();
-    }*/
-    
-    /*void coincidencia(){
-        ArrayList<Character> lista=new ArrayList();
-        indice=0;
-        indice=reglasProduccion();
-        if(esLetraNumero(al.get(indice))==true){
-            lista.add(al.get(indice));
-            int aux=0;    
-            do{
-                if(lista.get(0)==al.get(aux)){
-                    al.(aux)=lista.get(0);
-                }
-                    
-                }
-            }   
-        
-    }*/
-    
-    public static void main(String[] args) {
-        ConverionFNGFNG a = new ConverionFNGFNG("A->c|AA\nA->AA|BB");
 
-        //a.FNC();
+    /*void FNG(){
+     indice=reglasProduccion();
+     do{
+     if(esLetraNumero(al.get(indice))==true){
+     al.
+     }      
+     }while();
+     }*/
+    void coincidencia() {
+
+        indice = 0;
+        //guarda temporalmente el simbolo
+        char simbolo;
+        //guarda temporalmente la regla de produccion
+        char rp;
+        //contador principal
+        int indiceProduccion = 0;
+
+        
+            //encuentra simbolos terminales
+            do {
+                rp = al.get(reglasProduccion());
+            } while (esLetraNumero(rp) == false && indice < al.size());
+            //simbolo que produce la regla
+            simbolo = al.get(indice - 2);
+            //guardamos el indice de donde se encontraron rp y simbolo
+            int indiceSimbolo=indice-2;
+            indiceProduccion=indice;
+            
+            System.out.println(simbolo + " " + " " + rp);
+            //esta parte reemplaza los simbolos que producen estas constantes
+            indice = 0;
+
+            do {
+                if (al.get(indice) == simbolo && indice != indiceSimbolo) {
+                    al.set(indice, rp);
+                    indice++;
+                } else {
+                    indice++;
+                }
+            } while (indice < al.size());
+           
+        System.out.println(al.toString());
+    }
+
+    void reeemplazo() {
+        //esta parte reemplaza los simbolos que producen estas constantes
+    }
+
+    public static void main(String[] args) {
+        ConverionFNGFNG a = new ConverionFNGFNG("B->AB\nA->a\nC->DF\nD->x");
+
         a.coincidencia();
     }
 }
