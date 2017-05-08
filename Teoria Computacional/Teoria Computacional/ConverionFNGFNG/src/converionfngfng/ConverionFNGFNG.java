@@ -21,6 +21,19 @@ public class ConverionFNGFNG {
         }
         indice = 0;
     }
+    
+    void ImprimeOriginal(){
+        for(int i=0;i<al.size();i++){
+                try{
+                if(al.get(i+1)=='-' && i!=0){
+                System.out.print("\n");
+                System.out.print(al.get(i));}
+                else System.out.print(al.get(i));
+                }catch(IndexOutOfBoundsException ae){
+                    System.out.print(al.get(i));
+                }               
+            }
+    }
 
     //retorna el simbolo que produce
     int simbolo() {
@@ -28,6 +41,14 @@ public class ConverionFNGFNG {
             indice++;
         } while (al.get(indice) != '-');
         return indice - 1;
+    }
+    
+    int encuentraSimbolo(){
+        int aux=indice;
+        do {
+            aux--;
+        } while (al.get(aux) != '-');
+        return aux - 1;
     }
 
     //retorna la regla de produccion
@@ -157,45 +178,38 @@ public class ConverionFNGFNG {
         }
     }
 
-    /*void FNG(){
-     indice=reglasProduccion();
-     do{
-     if(esLetraNumero(al.get(indice))==true){
-     al.
-     }      
-     }while();
-     }*/
-    void coincidencia() {
-
-        
+    ArrayList<Character> coincidencia() {     
         //guarda temporalmente el simbolo
         char simbolo;
         //guarda temporalmente la regla de produccion
         char rp;
-        //contador principal
+        //contador para cada ciclo
         int indiceProduccion = 0;
+        //contador principal        
         int aux=0;
-        
         try{
         do{
-        indice=indiceProduccion;
+            indice=indiceProduccion;
         
             //encuentra simbolos terminales
             do {
                 rp = al.get(reglasProduccion());
             } while (esLetraNumero(rp) == false && indice < al.size());
+            
             //simbolo que produce la regla
-            simbolo = al.get(indice - 2);
+            simbolo = al.get(encuentraSimbolo());
             //guardamos el indice de donde se encontraron rp y simbolo
-            int indiceSimbolo=indice-2;
+            int indiceSimbolo=encuentraSimbolo();
             indiceProduccion=indice;
             
-            System.out.println(simbolo + " " + " " + rp);
+            //System.out.println(simbolo + " " + " " + rp);
             //esta parte reemplaza los simbolos que producen estas constantes
             indice = 0;
-
-            do {
-                if (al.get(indice) == simbolo && indice != indiceSimbolo) {
+            do{
+                if (al.get(indice) == simbolo && indice != indiceSimbolo &&
+                    al.get(indice-1) == '>' || al.get(indice) == simbolo &&
+                    indice != indiceSimbolo && al.get(indice-1) == '|'){
+                    
                     al.set(indice, rp);
                     indice++;
                 } else {
@@ -204,19 +218,30 @@ public class ConverionFNGFNG {
             } while (indice < al.size());
             aux++;
         }while(aux<al.size());
+        
+        //imprime la conversion 
         }catch(IndexOutOfBoundsException e){
-            System.out.println(al.toString());
+            
+            for(int i=0;i<al.size();i++){
+                try{
+                if(al.get(i+1)=='-' && i!=0){
+                System.out.print("\n");
+                System.out.print(al.get(i));}
+                else System.out.print(al.get(i));
+                }catch(IndexOutOfBoundsException ae){
+                    System.out.print(al.get(i));
+                }              
+            }
         }
         
-    }
+        return al;
+    
+        }
+    
 
-    void reeemplazo() {
-        //esta parte reemplaza los simbolos que producen estas constantes
-    }
-
-    public static void main(String[] args) {
-        ConverionFNGFNG a = new ConverionFNGFNG("B->AB\nA->a\nC->DF\nD->x");
-
+    /*public static void main(String[] args) {
+        ConverionFNGFNG a = new ConverionFNGFNG("S->AC\nM->BD|BN\nN->x\nA->z\nB->y\nC->MA\nD->MB");
+        a.ImprimeOriginal();
         a.coincidencia();
-    }
+    }*/
 }
