@@ -30,7 +30,6 @@ public class Logica {
     double Sumatoria(){
         double aux=0,total=0;
         do{
-            System.out.println(aux);
             total=total+Binomial(n,aux,p);
             aux++;            
         }while(aux<=x);
@@ -38,7 +37,7 @@ public class Logica {
     }
 
     public static void main(String args[]) {
-        Logica l=new Logica(2,1,0.25);
+        Logica l=new Logica(5,4,0.20);
         System.out.print(l.Sumatoria());
     }
 }
